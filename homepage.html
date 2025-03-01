@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCapital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .primary-color { background-color: #004977; } /* Capital One Blue */
+        .secondary-color { background-color: #D03027; } /* Capital One Red */
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&family=Chicle&family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-white text-gray-900">
+    
+    <!-- Navbar -->
+    <nav class="primary-color text-white py-4 px-6 flex justify-between items-center">
+        <h1 class="text-2xl font-bold">CapitalRewards</h1>
+        <ul class="flex space-x-6">
+            <li><a href="#badges" class="hover:text-gray-300">Badges</a></li>
+            <li><a href="#chatbox" class="hover:text-gray-300">AI Chatbox</a></li>
+            <li><a href="#login" class="secondary-color px-4 py-2 rounded-lg hover:bg-red-700">Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="h-screen flex flex-col items-center justify-center text-center px-6">
+        <h2 class="text-4xl font-bold text-gray-900 mb-4">Reimagine Banking with Smart Savings</h2>
+        <p class="text-gray-600 text-lg max-w-2xl">
+            Unlock financial opportunities with AI-driven insights and earn badges as you save. 
+            Experience the future of banking, today.
+        </p>
+        <a href="#badges" class="mt-6 bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800">
+            Start Saving & Earn Badges
+        </a>
+    </header>
+
+    <!-- Badges Section -->
+    <section id="badges" class="py-16 bg-gray-100 text-center">
+        <h2 class="text-3xl font-semibold text-gray-900 mb-6">Earn Badges for Your Savings</h2>
+        <p class="text-gray-600 max-w-xl mx-auto">
+            Save smartly and get rewarded! The more you save, the more badges you unlock.
+        </p>
+        <div class="mt-8 flex justify-center space-x-6">
+            <div class="p-6 bg-white shadow-lg rounded-lg">
+                <img src="https://via.placeholder.com/100" alt="Badge 1" class="mx-auto">
+                <p class="mt-4 font-semibold">Starter Saver</p>
+                <p class="text-sm text-gray-500">Save $100 to unlock</p>
+            </div>
+            <div class="p-6 bg-white shadow-lg rounded-lg">
+                <img src="https://via.placeholder.com/100" alt="Badge 2" class="mx-auto">
+                <p class="mt-4 font-semibold">Smart Investor</p>
+                <p class="text-sm text-gray-500">Save $1,000 to unlock</p>
+            </div>
+            <div class="p-6 bg-white shadow-lg rounded-lg">
+                <img src="https://via.placeholder.com/100" alt="Badge 3" class="mx-auto">
+                <p class="mt-4 font-semibold">Financial Guru</p>
+                <p class="text-sm text-gray-500">Save $10,000 to unlock</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chatbox Section -->
+    <section id="chatbox" class="py-16 text-center">
+        <h2 class="text-3xl font-semibold text-gray-900 mb-6">Talk to Our AI Financial Assistant</h2>
+        <p class="text-gray-600 max-w-xl mx-auto mb-8">
+            Get instant financial insights and smart money-saving advice with our AI chat assistant.
+        </p>
+        <div class="max-w-lg mx-auto bg-gray-100 p-6 rounded-lg shadow-lg">
+            <p class="text-gray-700">How can I assist you today?</p>
+            <input type="text" class="mt-4 w-full p-3 border rounded-lg" placeholder="Ask about your finances...">
+            <button class="mt-4 bg-blue-700 text-white px-6 py-2 rounded-lg hover:bg-blue-800">Chat Now</button>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section id="login" class="py-16 bg-gray-100 text-center">
+        <h2 class="text-3xl font-semibold text-gray-900 mb-6">Secure Login</h2>
+        <p class="text-gray-600 max-w-xl mx-auto">Sign in to access your savings, badges, and AI assistant.</p>
+        <a href="#" class="mt-6 inline-block bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800">
+            Login to Your Account
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="primary-color text-white py-6 text-center">
+        <p>&copy; 2025 CapitalOneBank. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
