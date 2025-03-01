@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earn Badges</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .primary-color { background-color: #004977; }
+        .secondary-color { background-color: #D03027; }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+
+<!-- Navbar -->
+<nav class="primary-color text-white py-4 px-6 flex justify-between items-center">
+    <h1 class="text-2xl font-bold">CapitalRewards</h1>
+    <ul class="flex space-x-6">
+        <li><a href="homepage.html" class="hover:text-gray-300">Home</a></li>
+        <li><a href="badges.html" class="hover:text-gray-300">Badges</a></li>
+        <li><a href="Chatpage.html" class="hover:text-gray-300">AI Chatbox</a></li>
+        <li><a href="Loginpage.html" class="secondary-color px-4 py-2 rounded-lg hover:bg-red-700">Login</a></li>
+    </ul>
+</nav>
+
+<!-- Badges Section -->
+<section class="py-16 bg-gray-100 text-center">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-semibold text-gray-900 mb-6">Earn Badges for Your Savings</h2>
+        <p class="text-gray-600 max-w-xl mx-auto">
+            Save smartly and get rewarded! The more you save, the more badges you unlock.
+        </p>
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div class="p-6 bg-white shadow-lg rounded-lg transition-transform hover:scale-105">
+                <div class="mx-auto w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                    <img src="assets/images/piggy-bank.svg" alt="Starter Saver" class="w-10">
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Starter Saver</h3>
+                <p class="text-sm text-gray-500 mb-4">Save $100 to unlock</p>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div class="bg-blue-600 h-2.5 rounded-full w-2/3"></div>
+                </div>
+                <p class="mt-2 text-xs text-gray-500">66% Complete</p>
+            </div>
+
+            <div class="p-6 bg-white shadow-lg rounded-lg transition-transform hover:scale-105">
+                <div class="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                    <img src="assets/images/briefcase.svg" alt="Smart Investor" class="w-10">
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Smart Investor</h3>
+                <p class="text-sm text-gray-500 mb-4">Save $1,000 to unlock</p>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div class="bg-green-600 h-2.5 rounded-full w-1/3"></div>
+                </div>
+                <p class="mt-2 text-xs text-gray-500">33% Complete</p>
+            </div>
+
+            <div class="p-6 bg-white shadow-lg rounded-lg transition-transform hover:scale-105">
+                <div class="mx-auto w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                    <img src="assets/images/award.svg" alt="Financial Guru" class="w-10">
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Financial Guru</h3>
+                <p class="text-sm text-gray-500 mb-4">Save $10,000 to unlock</p>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div class="bg-amber-600 h-2.5 rounded-full w-1/12"></div>
+                </div>
+                <p class="mt-2 text-xs text-gray-500">8% Complete</p>
+            </div>
+        </div>
+
+        <!-- Upcoming Badges -->
+        <div class="mt-16">
+            <h3 class="text-2xl font-semibold mb-6">Upcoming Badges</h3>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="p-4 bg-gray-200 rounded-lg opacity-75">
+                    <div class="mx-auto w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mb-2">
+                        <span class="text-gray-500">?</span>
+                    </div>
+                    <p class="font-medium text-gray-500">Locked Badge</p>
+                    <p class="text-xs text-gray-500">Keep saving to discover</p>
+                </div>
+                <div class="p-4 bg-gray-200 rounded-lg opacity-75">
+                    <div class="mx-auto w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mb-2">
+                        <span class="text-gray-500">?</span>
+                    </div>
+                    <p class="font-medium text-gray-500">Locked Badge</p>
+                    <p class="text-xs text-gray-500">Keep saving to discover</p>
+                </div>
+                <div class="p-4 bg-gray-200 rounded-lg opacity-75">
+                    <div class="mx-auto w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mb-2">
+                        <span class="text-gray-500">?</span>
+                    </div>
+                    <p class="font-medium text-gray-500">Locked Badge</p>
+                    <p class="text-xs text-gray-500">Keep saving to discover</p>
+                </div>
+                <div class="p-4 bg-gray-200 rounded-lg opacity-75">
+                    <div class="mx-auto w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mb-2">
+                        <span class="text-gray-500">?</span>
+                    </div>
+                    <p class="font-medium text-gray-500">Locked Badge</p>
+                    <p class="text-xs text-gray-500">Keep saving to discover</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="primary-color text-white py-6 text-center">
+    <p>&copy; 2025 CapitalOneBank. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

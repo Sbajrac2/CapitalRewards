@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartSaver - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .primary-color { background-color: #004977; }
+        .secondary-color { background-color: #D03027; }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+
+<!-- Navbar -->
+<nav class="primary-color text-white py-4 px-6 flex justify-between items-center">
+    <h1 class="text-2xl font-bold">CapitalRewards</h1>
+    <ul class="flex space-x-6">
+        <li><a href="homepage.html" class="hover:text-gray-300">Home</a></li>
+        <li><a href="badges.html" class="hover:text-gray-300">Badges</a></li>
+        <li><a href="Chatpage.html" class="hover:text-gray-300">AI Chatbox</a></li>
+        <li><a href="Loginpage.html" class="secondary-color px-4 py-2 rounded-lg hover:bg-red-700">Login</a></li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+<header class="h-screen flex flex-col items-center justify-center text-center px-6">
+    <h2 class="text-4xl font-bold text-gray-900 mb-4">Reimagine Banking with Smart Savings</h2>
+    <p class="text-gray-600 text-lg max-w-2xl">
+        Unlock financial opportunities with AI-driven insights and earn badges as you save.
+        Experience the future of banking, today.
+    </p>
+    <a href="badges.html" class="mt-6 bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800 text-lg">
+        Start Saving & Earn Badges
+    </a>
+</header>
+
+<main class="flex-1">
+    <!-- Feature Sections -->
+    <section class="py-16 bg-gray-100 text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold tracking-tight mb-8">Explore CapitalRewards Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition-all">
+                    <h3 class="text-xl font-semibold mb-2">Earn Badges</h3>
+                    <p class="text-gray-600 mb-4">Collect digital badges as you reach savings milestones.</p>
+                    <a href="badges.html" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                        View Badges
+                    </a>
+                </div>
+
+                <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition-all">
+                    <h3 class="text-xl font-semibold mb-2">AI Financial Assistant</h3>
+                    <p class="text-gray-600 mb-4">Get personalized financial insights with our AI chatbot.</p>
+                    <a href="Chatpage.html" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                        Chat Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+</main>
+
+<!-- Footer -->
+<footer class="primary-color text-white py-6 text-center">
+    <p>&copy; 2025 CapitalOneBank. All rights reserved.</p>
+</footer>
+
+<script>
+    function sendMessage() {
+        const inputField = document.getElementById("chat-input");
+        const message = inputField.value.trim();
+        if (!message) return;
+
+        const chatContainer = document.getElementById("chat-container");
+
+        const userMessage = document.createElement("div");
+        userMessage.className = "flex justify-end";
+        userMessage.innerHTML = `
+                <div class="bg-blue-600 text-white p-3 rounded-lg max-w-[80%]">
+                    ${message}
+                </div>
+            `;
+        chatContainer.appendChild(userMessage);
+        inputField.value = "";
+
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        setTimeout(() => {
+            const responses = [
+                "Based on your savings goals, I recommend creating a budget that allocates 20% of your income to savings.",
+                "Looking at market trends, this might be a good time to invest in index funds. Would you like more information?",
+                "Have you considered setting up automatic transfers to your savings account? It's an effective way to build savings consistently.",
+                "To earn more reward points, try using your SmartSaver card for everyday purchases and pay it off each month.",
+                "I notice you've been saving consistently. Great job! You're on track to reach your financial goals ahead of schedule."
+            ];
+
+            const botMessage = document.createElement("div");
+            botMessage.className = "flex items-start gap-2";
+            botMessage.innerHTML = `
+                    <div class="h-6 w-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs">🤖</div>
+                    <div class="bg-gray-200 p-3 rounded-lg max-w-[80%]">
+                        ${responses[Math.floor(Math.random() * responses.length)]}
+                    </div>
+                `;
+            chatContainer.appendChild(botMessage);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }, 1500);
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            sendMessage();
+        }
+    }
+
+    function resetChat() {
+        document.getElementById("chat-container").innerHTML = `<div class="flex items-start gap-2"><div class="h-6 w-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs">🤖</div><div class="bg-gray-200 p-3 rounded-lg max-w-[80%]">Hello! I'm your SmartSaver AI assistant. How can I help you with your financial goals today?</div></div>`;
+        alert("Chat has been reset");
+    }
+</script>
+
+</body>
+</html>
