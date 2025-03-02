@@ -3,6 +3,12 @@ from flask_cors import CORS
 from google import genai
 import re
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Load variables from .env file
+api_key = os.environ.get('API_KEY')
+
 app = Flask(__name__)
 app.secret_key = "your_secret_key_here"  # Add a secret key for session management
 CORS(app)
@@ -15,7 +21,7 @@ def homepage():
 def login():
     return render_template('Loginpage.html')
 
-client = genai.Client(api_key="AIzaSyBIvKviwbeNVPKqxSAT1QlZbOxLq1-_pXE")
+client = genai.Client(api_key)
 
 @app.route("/Chatpage", methods=["GET", "POST"])
 def chatpage():
