@@ -27,29 +27,52 @@ def chatpage():
     
     if request.method == "POST":
         user_message = request.form.get("message")  # Get user input
-        
+        model_option = request.form.get("model")
+
         if user_message:
-            try:
-                # Add user message to chat history
-                session['chat_history'].append({"role": "user", "content": user_message})
-                
-                # Generate AI response
-                response = client.models.generate_content_stream(
-                    model="gemini-2.0-flash",
-                    contents=["Someone wants to buy " + user_message + " . List 3 investment options instead for that amount of money and 3 alternative cheaper options for the thing they are buying. Give a concise response"])
-                
-                for chunk in response:
-                    ai_response += chunk.text
-                
-                # Format the response: Add a newline before "Cheaper"
-                ai_response = re.sub(r'(Cheaper)', r'\n\1', ai_response, flags=re.IGNORECASE)
-                
-                # Add AI response to chat history
-                session['chat_history'].append({"role": "assistant", "content": ai_response})
-                session.modified = True  # Make sure session is saved
-                
-            except Exception as e:
-                ai_response = f"Error: {str(e)}"
+            if model_option=="SmartSaver":
+                try:
+                    # Add user message to chat history
+                    session['chat_history'].append({"role": "user", "content": user_message})
+                    
+                    # Generate AI response
+                    response = client.models.generate_content_stream(
+                        model="gemini-2.0-flash",
+                        contents=["Someone wants to buy " + user_message + " . List 3 investment options instead for that amount of money and 3 alternative cheaper options for the thing they are buying. Give a concise response"])
+                    
+                    for chunk in response:
+                        ai_response += chunk.text
+                    
+                    # Format the response: Add a newline before "Cheaper"
+                    ai_response = re.sub(r'(Cheaper)', r'\n\1', ai_response, flags=re.IGNORECASE)
+                    
+                    # Add AI response to chat history
+                    session['chat_history'].append({"role": "assistant", "content": ai_response})
+                    session.modified = True  # Make sure session is saved
+                    
+                except Exception as e:
+                    ai_response = f"Error: {str(e)}"
+
+            elif model_option=="GenQ":
+                try:
+                    # Add user message to chat history
+                    session['chat_history'].append({"role": "user", "content": user_message})
+                    
+                    # Generate AI response
+                    response = client.models.generate_content_stream(
+                        model="gemini-2.0-flash",
+                        contents=["Make the response concise " + user_message])
+                    
+                    for chunk in response:
+                        ai_response += chunk.text
+                                        
+                    # Add AI response to chat history
+                    session['chat_history'].append({"role": "assistant", "content": ai_response})
+                    session.modified = True  # Make sure session is saved
+                    
+                except Exception as e:
+                    ai_response = f"Error: {str(e)}"
+
     
     # For GET requests or after processing POST, render the template
     return render_template("Chatpage.html", response=ai_response, chat_history=session.get('chat_history'))
