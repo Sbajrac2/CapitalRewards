@@ -5,10 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartSaver AI Chatbox</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- <link rel="stylesheet" href="assets/css/styles.css"> -->
+    <link rel="stylesheet" href="static/css/homepage.css">
     <style>
         .primary-color { background-color: #004977; }
         .secondary-color { background-color: #D03027; }
+
+        /* Popup Modal */
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            z-index: 1000;
+            cursor: grab;
+        }
+
+        #popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            cursor: move;
+        }
+
+        #close-popup {
+            cursor: pointer;
+            font-size: 20px;
+            color: red;
+        }
+
+        /* Overlay */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 999;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-900">
@@ -42,6 +86,7 @@
                             🤖
                         </div>
                         <span class="font-medium">SmartSaver AI</span>
+                    </div>
                     <button onclick="resetChat()" class="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400">
                         🔄 Reset Chat
                     </button>
@@ -106,8 +151,33 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Done Asking Button - Moved outside the chatbox but inside the section -->
+        <div class="mt-4">
+            <button id="done-asking-btn" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                📤 Done Asking?
+            </button>
+        </div>
     </div>
 </section>
+
+<!-- Overlay & Popup Modal -->
+<div id="overlay"></div>
+
+<div id="popup">
+    <div id="popup-header">
+        <span>How much did you save?</span>
+        <span id="close-popup">&times;</span>
+    </div>
+    <input type="number" id="savings-input" placeholder="Enter amount saved" class="w-full p-2 border rounded-md my-3">
+    <button onclick="submitSavings()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+        Submit
+    </button>
+    <p id="reward-message" class="mt-4 text-gray-700 hidden"></p>
+    <a href="badges" id="badge-link" class="hidden mt-2 inline-block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+        🎖 See Your Badge
+    </a>
+</div>
 
 <!-- Footer -->
 <footer class="primary-color text-white py-6 text-center">
@@ -133,6 +203,75 @@
             `;
         alert("Chat has been reset");
     }
+    
+    // Popup functionality
+    const overlay = document.getElementById('overlay');
+    const popup = document.getElementById('popup');
+    const doneAskingBtn = document.getElementById('done-asking-btn');
+    const closePopupBtn = document.getElementById('close-popup');
+    
+    // Function to show popup
+    function showPopup() {
+        overlay.style.display = 'block';
+        popup.style.display = 'block';
+    }
+    
+    // Function to hide popup
+    function hidePopup() {
+        overlay.style.display = 'none';
+        popup.style.display = 'none';
+    }
+    
+    // Event listener for the "Done Asking?" button
+    doneAskingBtn.addEventListener('click', showPopup);
+    
+    // Event listener for the close button
+    closePopupBtn.addEventListener('click', hidePopup);
+    
+    // Also close when clicking on the overlay
+    overlay.addEventListener('click', hidePopup);
+    
+    // Function to handle savings submission
+    function submitSavings() {
+        const savedAmount = document.getElementById("savings-input").value;
+        const rewardPoints = Math.floor(savedAmount * 10);
+
+         // Store the points in localStorage
+        let currentPoints = localStorage.getItem("rewardPoints") || 0;
+        currentPoints = parseInt(currentPoints) + rewardPoints;
+        localStorage.setItem("rewardPoints", currentPoints);
+
+
+        document.getElementById("reward-message").innerText = `Wow! You earned ${rewardPoints} points! 🎉`;
+        document.getElementById("reward-message").classList.remove("hidden");
+        document.getElementById("badge-link").classList.remove("hidden");
+    }
+    
+    // Make popup draggable
+    let isDragging = false;
+    let offsetX, offsetY;
+    
+    const popupHeader = document.getElementById('popup-header');
+    
+    popupHeader.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        offsetX = e.clientX - popup.getBoundingClientRect().left;
+        offsetY = e.clientY - popup.getBoundingClientRect().top;
+        popup.style.cursor = 'grabbing';
+    });
+    
+    document.addEventListener('mousemove', function(e) {
+        if (isDragging) {
+            popup.style.left = (e.clientX - offsetX) + 'px';
+            popup.style.top = (e.clientY - offsetY) + 'px';
+            popup.style.transform = 'none'; // Remove the default transform
+        }
+    });
+    
+    document.addEventListener('mouseup', function() {
+        isDragging = false;
+        popup.style.cursor = 'grab';
+    });
 </script>
 
 </body>
