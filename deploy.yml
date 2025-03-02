@@ -1,0 +1,37 @@
+name: Deploy to PythonAnywhere
+
+on:
+  push:
+    branches: [ main ]  # or your default branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          
+      - name: Deploy to PythonAnywhere
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          PA_USERNAME: your_pythonanywhere_username
+        run: |
+          # Create a deployment script
+          echo '#!/bin/bash
+          cd ~/path/to/your/project
+          git pull
+          pip install --user -r requirements.txt
+          
+          # Create or update .env file with API key
+          echo "API_KEY=${{ secrets.API_KEY }}" > .env
+          
+          # Touch the WSGI file to reload the app
+          touch /var/www/$PA_USERNAME_pythonanywhere_com_wsgi.py
+          ' > deploy.sh
+          
+          # Execute the deployment
+          ssh $PA_USERNAME@ssh.pythonanywhere.com "bash -s" < deploy.sh
