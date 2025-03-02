@@ -27,6 +27,9 @@
 
 <!-- Badges Section -->
 <section id="badges" class="py-16 bg-gray-100 text-center">
+    <p id="total-points-display" class="mt-4 text-lg font-semibold text-gray-700">
+        Total Points: 0
+    </p>
     <h2 class="text-3xl font-semibold text-gray-900 mb-6">Earn Badges for Your Savings!</h2>
     <p class="text-gray-600 max-w-xl mx-auto">
         Save smartly and get rewarded! The more you save, the more badges you unlock.
@@ -174,7 +177,8 @@
         }
 
         totalPoints = parseInt(totalPoints);
-
+        // Update the total points display
+        document.getElementById("total-points-display").innerText = `Total Points: ${totalPoints}`;
 
         // Define the required points for each badge level
         const badgeLevels = [
