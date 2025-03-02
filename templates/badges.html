@@ -6,7 +6,7 @@
     <title>Earn Badges</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="data:,">
-    <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="static/css/homepage.css">
     <style>
         .primary-color { background-color: #004977; }
         .secondary-color { background-color: #D03027; }
@@ -18,10 +18,10 @@
 <nav class="primary-color text-white py-4 px-6 flex justify-between items-center">
     <h1 class="text-2xl font-bold">CapitalRewards</h1>
     <ul class="flex space-x-6">
-        <li><a href="homepage.html" class="hover:text-gray-300">Home</a></li>
-        <li><a href="badges.html" class="hover:text-gray-300">Badges</a></li>
-        <li><a href="Chatpage.html" class="hover:text-gray-300">AI Chatbox</a></li>
-        <li><a href="Loginpage.html" class="secondary-color px-4 py-2 rounded-lg hover:bg-red-700">Login</a></li>
+        <li><a href="homepage" class="hover:text-gray-300">Home</a></li>
+        <li><a href="badges" class="hover:text-gray-300">Badges</a></li>
+        <li><a href="Chatpage" class="hover:text-gray-300">AI Chatbox</a></li>
+        <li><a href="Loginpage" class="secondary-color px-4 py-2 rounded-lg hover:bg-red-700">Login</a></li>
     </ul>
 </nav>
 
@@ -35,7 +35,7 @@
         <!-- First Row -->
         <div class="p-6 bg-white shadow-lg rounded-lg">
             <div class="badge1">
-                <img src="badge1.png" alt="Badge 1" class="mx-auto">
+                <img src="static/images/badge1.png" alt="Badge 1" class="mx-auto">
             </div>
             <p class="mt-4 font-semibold">Starter Saver</p>
             <p class="text-sm text-gray-500">Save $10 to unlock</p>
@@ -48,7 +48,7 @@
         </div>
         <div class="p-6 bg-white shadow-lg rounded-lg">
             <div class="badge2">
-                <img src="badge2.png" alt="Badge 2" class="mx-auto">
+                <img src="static/images/badge2.png" alt="Badge 2" class="mx-auto">
             </div>
             <p class="mt-4 font-semibold">Smart Investor</p>
             <p class="text-sm text-gray-500">Save $100 to unlock</p>
@@ -62,7 +62,7 @@
         </div>
         <div class="p-6 bg-white shadow-lg rounded-lg">
             <div class="badge3">
-                <img src="badge3.png" alt="Badge 3" class="mx-auto">
+                <img src="static/images/badge3.png" alt="Badge 3" class="mx-auto">
             </div>
             <p class="mt-4 font-semibold">Financial Guru</p>
             <p class="text-sm text-gray-500">Save $250 to unlock</p>
@@ -76,7 +76,7 @@
         <!-- Second Row -->
         <div class="p-6 bg-white shadow-lg rounded-lg">
             <div class="badge4">
-                <img src="badge4.png" alt="Badge 4" class="mx-auto">
+                <img src="static/images/badge4.png" alt="Badge 4" class="mx-auto">
             </div>
             <p class="mt-4 font-semibold">Savings Master</p>
             <p class="text-sm text-gray-500">Save $500 to unlock</p>
@@ -88,7 +88,7 @@
         </div>
         <div class="p-6 bg-white shadow-lg rounded-lg">
             <div class="badge5">
-                <img src="badge5.png" alt="Badge 5" class="mx-auto">
+                <img src="static/images/badge5.png" alt="Badge 5" class="mx-auto">
             </div>
             <p class="mt-4 font-semibold">Wealth Builder</p>
             <p class="text-sm text-gray-500">Save $1000 to unlock</p>
@@ -100,7 +100,7 @@
         </div>
         <div class="p-6 bg-white shadow-lg rounded-lg">
             <div class="badge6">
-                <img src="badge6.png" alt="Badge 6" class="mx-auto">
+                <img src="static/images/badge6.png" alt="Badge 6" class="mx-auto">
             </div>
             <p class="mt-4 font-semibold">Elite Saver</p>
             <p class="text-sm text-gray-500">Save $5000 to unlock</p>
@@ -147,10 +147,11 @@
             </div>
         </div>
     </div>
+    <button onclick="resetPoints()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+        Reset Progress
+    </button>
 </section>
-<button onclick="resetPoints()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700">
-    Reset Progress
-</button>
+
 <!-- Footer -->
 <footer class="primary-color text-white py-6 text-center">
     <p>&copy; 2025 CapitalRewards. All rights reserved.</p>
@@ -177,12 +178,12 @@
 
         // Define the required points for each badge level
         const badgeLevels = [
-        { id: "badge1-progress", textId: "badge1-text", required: 10 },
-        { id: "badge2-progress", textId: "badge2-text", required: 100 },
-        { id: "badge3-progress", textId: "badge3-text", required: 250 },
-        { id: "badge4-progress", textId: "badge4-text", required: 500 },
-        { id: "badge5-progress", textId: "badge5-text", required: 1000 },
-        { id: "badge6-progress", textId: "badge6-text", required: 5000 },
+        { id: "badge1-progress", textId: "badge1-text", required: 100 },
+        { id: "badge2-progress", textId: "badge2-text", required: 1000 },
+        { id: "badge3-progress", textId: "badge3-text", required: 2500 },
+        { id: "badge4-progress", textId: "badge4-text", required: 5000 },
+        { id: "badge5-progress", textId: "badge5-text", required: 10000 },
+        { id: "badge6-progress", textId: "badge6-text", required: 50000 },
         ];
 
         // Loop through each badge level and update the progress
