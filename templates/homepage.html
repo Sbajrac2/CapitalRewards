@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CapitalRewards - Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- <link rel="stylesheet" href="assets/css/styles.css"> -->
-    <link rel="stylesheet" href="static/css/homepage.css">
+    <link rel="stylesheet" href="../static/css/homepage.css">
     <style>
         .primary-color { background-color: #004977; }
         .secondary-color { background-color: #D03027; }
@@ -21,7 +20,9 @@
         <li><a href="homepage" class="hover:text-gray-300">Home</a></li>
         <li><a href="badges" class="hover:text-gray-300">Badges</a></li>
         <li><a href="Chatpage" class="hover:text-gray-300">AI Chatbox</a></li>
-        <li><a href="loginpage" class="secondary-color px-4 py-2 rounded-lg hover:bg-red-700">Login</a></li>
+        <li id="login-area">
+            <a href="Loginpage" class="secondary-color px-4 py-2 rounded-lg hover:bg-red-700">Login</a>
+        </li>
     </ul>
 </nav>
 
@@ -33,8 +34,8 @@
             Unlock financial opportunities with AI-driven insights and earn badges as you save.
             Experience the future of banking, today.
         </p>
-        <a href="badges" class="button-badge"> 
-    <!--         #badges -->
+        <a href="badges" class="button-badge">
+            <!--         #badges -->
             Start Saving & Earn Badges
         </a>
     </header>
@@ -50,7 +51,7 @@
                 <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition-all">
                     <h3 class="text-xl font-semibold mb-2">Earn Badges</h3>
                     <p class="text-gray-600 mb-4">Collect digital badges as you reach savings milestones.</p>
-                    <a href="badges" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                    <a href="badges" class="bg-[#004977] text-white px-6 py-3 rounded-lg hover:bg-[#00365A] mt-4">
                         View Badges
                     </a>
                 </div>
@@ -58,75 +59,69 @@
                 <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition-all">
                     <h3 class="text-xl font-semibold mb-2">AI Financial Assistant</h3>
                     <p class="text-gray-600 mb-4">Get personalized financial insights with our AI chatbot.</p>
-                    <a href="Chatpage" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
-                        Chat Now
+                    <a href="badges" class="bg-[#004977] text-white px-6 py-3 rounded-lg hover:bg-[#00365A] mt-4">
+                        Start Saving & Earn Badges
                     </a>
                 </div>
             </div>
         </div>
     </section>
-
-    
 </main>
 
 <!-- Footer -->
 <footer class="primary-color text-white py-6 text-center">
-    <p>&copy; 2025 CapitalRewards. All rights reserved.</p>
+    <p>&copy; 2025 CapitalOneBank. All rights reserved.</p>
 </footer>
 
 <script>
-    function sendMessage() {
-        const inputField = document.getElementById("chat-input");
-        const message = inputField.value.trim();
-        if (!message) return;
+    function updateNavbar() {
+        const loginArea = document.getElementById("login-area");
+        const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
-        const chatContainer = document.getElementById("chat-container");
-
-        const userMessage = document.createElement("div");
-        userMessage.className = "flex justify-end";
-        userMessage.innerHTML = `
-                <div class="bg-blue-600 text-white p-3 rounded-lg max-w-[80%]">
-                    ${message}
+        if (user) {
+            loginArea.innerHTML = `
+                <div class="relative">
+                    <button id="dropdownButton" class="bg-green-600 text-white px-4 py-2 rounded-lg focus:outline-none">
+                        ${user.username} ▼
+                    </button>
+                    <div id="dropdownMenu" class="absolute right-0 mt-2 bg-white text-black py-2 rounded-lg shadow-md z-50 hidden">
+                        <a href="profile" class="block px-4 py-2 hover:bg-gray-200">Profile</a>
+                        <a href="rewards" class="block px-4 py-2 hover:bg-gray-200">🏆Rewards</a>
+                        <a href="/logout" id="logoutLink" class="block px-4 py-2 hover:bg-gray-200">Logout</a>
+                    </div>
                 </div>
             `;
-        chatContainer.appendChild(userMessage);
-        inputField.value = "";
 
-        chatContainer.scrollTop = chatContainer.scrollHeight;
+            const dropdownButton = document.getElementById("dropdownButton");
+            const dropdownMenu = document.getElementById("dropdownMenu");
 
-        setTimeout(() => {
-            const responses = [
-                "Based on your savings goals, I recommend creating a budget that allocates 20% of your income to savings.",
-                "Looking at market trends, this might be a good time to invest in index funds. Would you like more information?",
-                "Have you considered setting up automatic transfers to your savings account? It's an effective way to build savings consistently.",
-                "To earn more reward points, try using your SmartSaver card for everyday purchases and pay it off each month.",
-                "I notice you've been saving consistently. Great job! You're on track to reach your financial goals ahead of schedule."
-            ];
+            // Toggle dropdown on click
+            dropdownButton.addEventListener("click", function (event) {
+                event.stopPropagation(); // Prevent closing when clicking button
+                dropdownMenu.classList.toggle("hidden");
+            });
 
-            const botMessage = document.createElement("div");
-            botMessage.className = "flex items-start gap-2";
-            botMessage.innerHTML = `
-                    <div class="h-6 w-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs">🤖</div>
-                    <div class="bg-gray-200 p-3 rounded-lg max-w-[80%]">
-                        ${responses[Math.floor(Math.random() * responses.length)]}
-                    </div>
-                `;
-            chatContainer.appendChild(botMessage);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }, 1500);
-    }
+            // Close dropdown when clicking outside
+            document.addEventListener("click", function (event) {
+                if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    dropdownMenu.classList.add("hidden");
+                }
+            });
 
-    function handleKeyPress(event) {
-        if (event.key === "Enter" && !event.shiftKey) {
-            event.preventDefault();
-            sendMessage();
+            // Logout functionality
+            document.getElementById("logoutLink").addEventListener("click", function (event) {
+                event.preventDefault();
+                logout();
+            });
         }
     }
 
-    function resetChat() {
-        document.getElementById("chat-container").innerHTML = `<div class="flex items-start gap-2"><div class="h-6 w-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs">🤖</div><div class="bg-gray-200 p-3 rounded-lg max-w-[80%]">Hello! I'm your SmartSaver AI assistant. How can I help you with your financial goals today?</div></div>`;
-        alert("Chat has been reset");
+    function logout() {
+        localStorage.removeItem("loggedInUser");
+        window.location.href = "/logout";  // Redirect to logout route
     }
+
+    document.addEventListener("DOMContentLoaded", updateNavbar);
 </script>
 
 </body>
