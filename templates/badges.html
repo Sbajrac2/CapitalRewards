@@ -25,6 +25,7 @@
     </ul>
 </nav>
 
+
 <!-- Badges Section -->
 <section id="badges" class="py-16 bg-gray-100 text-center relative">
     <p id="total-points-display" class="mt-4 text-lg font-semibold text-gray-700">
@@ -47,7 +48,7 @@
             </div>
             <p id="badge1-text" class="mt-2 text-xs text-gray-500">0% Complete</p>
             <p class="mt-2 text-xs text-gray-500">100 Points</p>
-           
+
         </div>
         <div class="p-6 bg-white shadow-lg rounded-lg">
             <div class="badge2">
@@ -60,8 +61,8 @@
             </div>
             <p id="badge2-text" class="mt-2 text-xs text-gray-500">0% Complete</p>
             <p class="mt-2 text-xs text-gray-500">1000 Points</p>
-            
-            
+
+
         </div>
         <div class="p-6 bg-white shadow-lg rounded-lg">
             <div class="badge3">
@@ -75,7 +76,7 @@
             <p id="badge3-text" class="mt-2 text-xs text-gray-500">0% Complete</p>
             <p class="mt-2 text-xs text-gray-500">2,500 Points</p>
         </div>
-    
+
         <!-- Second Row -->
         <div class="p-6 bg-white shadow-lg rounded-lg">
             <div class="badge4">
@@ -115,40 +116,40 @@
         </div>
     </div>
 
-        <!-- Upcoming Badges -->
-        <div class="mt-16">
-            <h3 class="text-2xl font-semibold mb-6">Upcoming Badges</h3>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-                <div class="p-4 bg-gray-200 rounded-lg opacity-75">
-                    <div class="mx-auto w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mb-2">
-                        <span class="text-gray-500">?</span>
-                    </div>
-                    <p class="font-medium text-gray-500">Locked Badge</p>
-                    <p class="text-xs text-gray-500">Keep saving to discover</p>
+    <!-- Upcoming Badges -->
+    <div class="mt-16">
+        <h3 class="text-2xl font-semibold mb-6">Upcoming Badges</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            <div class="p-4 bg-gray-200 rounded-lg opacity-75">
+                <div class="mx-auto w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mb-2">
+                    <span class="text-gray-500">?</span>
                 </div>
-                <div class="p-4 bg-gray-200 rounded-lg opacity-75">
-                    <div class="mx-auto w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mb-2">
-                        <span class="text-gray-500">?</span>
-                    </div>
-                    <p class="font-medium text-gray-500">Locked Badge</p>
-                    <p class="text-xs text-gray-500">Keep saving to discover</p>
+                <p class="font-medium text-gray-500">Locked Badge</p>
+                <p class="text-xs text-gray-500">Keep saving to discover</p>
+            </div>
+            <div class="p-4 bg-gray-200 rounded-lg opacity-75">
+                <div class="mx-auto w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mb-2">
+                    <span class="text-gray-500">?</span>
                 </div>
-                <div class="p-4 bg-gray-200 rounded-lg opacity-75">
-                    <div class="mx-auto w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mb-2">
-                        <span class="text-gray-500">?</span>
-                    </div>
-                    <p class="font-medium text-gray-500">Locked Badge</p>
-                    <p class="text-xs text-gray-500">Keep saving to discover</p>
+                <p class="font-medium text-gray-500">Locked Badge</p>
+                <p class="text-xs text-gray-500">Keep saving to discover</p>
+            </div>
+            <div class="p-4 bg-gray-200 rounded-lg opacity-75">
+                <div class="mx-auto w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mb-2">
+                    <span class="text-gray-500">?</span>
                 </div>
-                <div class="p-4 bg-gray-200 rounded-lg opacity-75">
-                    <div class="mx-auto w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mb-2">
-                        <span class="text-gray-500">?</span>
-                    </div>
-                    <p class="font-medium text-gray-500">Locked Badge</p>
-                    <p class="text-xs text-gray-500">Keep saving to discover</p>
+                <p class="font-medium text-gray-500">Locked Badge</p>
+                <p class="text-xs text-gray-500">Keep saving to discover</p>
+            </div>
+            <div class="p-4 bg-gray-200 rounded-lg opacity-75">
+                <div class="mx-auto w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mb-2">
+                    <span class="text-gray-500">?</span>
                 </div>
+                <p class="font-medium text-gray-500">Locked Badge</p>
+                <p class="text-xs text-gray-500">Keep saving to discover</p>
             </div>
         </div>
+    </div>
     </div>
     <button onclick="resetPoints()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700">
         Reset Progress
@@ -172,8 +173,8 @@
         console.log("Total Points from localStorage:", totalPoints);
 
         if (!totalPoints) {
-        console.error("⚠️ No points found in localStorage!");
-        return; // Stop execution if points are missing
+            console.error("⚠️ No points found in localStorage!");
+            return; // Stop execution if points are missing
         }
 
         totalPoints = parseInt(totalPoints);
@@ -182,12 +183,12 @@
 
         // Define the required points for each badge level
         const badgeLevels = [
-        { id: "badge1-progress", textId: "badge1-text", required: 100 },
-        { id: "badge2-progress", textId: "badge2-text", required: 1000 },
-        { id: "badge3-progress", textId: "badge3-text", required: 2500 },
-        { id: "badge4-progress", textId: "badge4-text", required: 5000 },
-        { id: "badge5-progress", textId: "badge5-text", required: 10000 },
-        { id: "badge6-progress", textId: "badge6-text", required: 50000 },
+            { id: "badge1-progress", textId: "badge1-text", required: 100 },
+            { id: "badge2-progress", textId: "badge2-text", required: 1000 },
+            { id: "badge3-progress", textId: "badge3-text", required: 2500 },
+            { id: "badge4-progress", textId: "badge4-text", required: 5000 },
+            { id: "badge5-progress", textId: "badge5-text", required: 10000 },
+            { id: "badge6-progress", textId: "badge6-text", required: 50000 },
         ];
 
         // Loop through each badge level and update the progress
@@ -195,14 +196,14 @@
             const progressBar = document.getElementById(badge.id);
             const progressText = document.getElementById(badge.textId); //completed text?
             if (!progressBar) {
-            console.error(`⚠️ Progress bar not found for ${badge.id}`);
-            return;
-        }
+                console.error(`⚠️ Progress bar not found for ${badge.id}`);
+                return;
+            }
 
-        if (!progressText) {
-            console.error(`⚠️ Progress text not found for ${badge.textId}`);
-            return;
-        }
+            if (!progressText) {
+                console.error(`⚠️ Progress text not found for ${badge.textId}`);
+                return;
+            }
             if (progressBar && progressText) {
                 let percentage = (totalPoints / badge.required) * 100;
                 percentage = Math.min(percentage, 100); // Ensure max is 100%
@@ -210,24 +211,14 @@
                 progressBar.style.width = percentage + "%";
                 progressText.innerText = `${Math.round(percentage)}% Complete`;
                 //progressBar.nextElementSibling.innerText = `${Math.round(percentage)}% Complete`;
-                // 🎉 Trigger confetti when progress reaches 100%
-            if (percentage === 100) {
-                launchConfetti();
-            }
             }
         });
     });
-    // 🎊 Confetti Animation Function (OUTSIDE event listeners)
-function launchConfetti() {
-    confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-    });
-}
     window.addEventListener("storage", function () {
-    location.reload(); // Auto-refresh the badges page when points update
-});
+        location.reload(); // Auto-refresh the badges page when points update
+    });
+
 </script>
+
 </body>
 </html>
