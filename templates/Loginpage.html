@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
-<!--    <link rel="stylesheet" href="assets/css/styles.css">-->
+    <link rel="stylesheet" href="assets/css/styles.css">
     <style>
         .primary-color { background-color: #004977; }
     </style>
@@ -15,7 +14,7 @@
 
 <!-- Navbar -->
 <nav class="primary-color text-white py-4 px-6 flex justify-between">
-    <a href="homepage" class="font-bold">Home</a>
+    <a href="homepage.html" class="font-bold">Home</a>
 </nav>
 
 <!-- Login Section -->
@@ -26,8 +25,8 @@
     <div class="mt-8 max-w-md mx-auto bg-white p-8 shadow-lg rounded-lg">
         <form id="login-form">
             <div class="mb-4">
-                <label for="email" class="block text-gray-700 font-medium">Email</label>
-                <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="Enter your email" required>
+                <label for="user" class="block text-gray-700 font-medium">Email or Username</label>
+                <input type="text" id="user" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="Enter email or username" required>
             </div>
 
             <div class="mb-4">
@@ -40,33 +39,48 @@
             </button>
 
             <p class="text-sm text-gray-600 mt-4">
-                Don't have an account? <a href="register" class="text-blue-600 hover:underline">Sign up</a>
+                Don't have an account? <a href="register.html" class="text-blue-600 hover:underline">Sign up</a>
             </p>
-        </form>x
+
+            <p id="error-message" class="text-red-600 mt-4 hidden">Invalid credentials. Please try again.</p>
+        </form>
     </div>
 </section>
 
 <script>
-    async function loginUser() {
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
+    function loginUser() {
+        const hardcodedUser = {
+            username: "admin",
+            email: "admin@example.com",
+            password: "password123"
+        };
 
-        const response = await fetch("http://127.0.0.1:5000/Loginpage", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
-        });
+        const userInput = document.getElementById("user").value;
+        const passwordInput = document.getElementById("password").value;
+        const errorMessage = document.getElementById("error-message");
 
-        const data = await response.json();
-        if (response.ok) {
+        if ((userInput === hardcodedUser.username || userInput === hardcodedUser.email) && passwordInput === hardcodedUser.password) {
             alert("Login successful!");
-            localStorage.setItem("token", data.token);
-            window.location.href = "dashboard"; // Redirect after login
-        } else {
-            alert(data.message);
+            localStorage.setItem("loggedInUser", JSON.stringify({ username: hardcodedUser.username }));
+            window.location.href = "homepage"; // Redirect to homepage
+        }
+        else {
+            const registeredUsers = JSON.parse(localStorage.getItem("users")) || [];
+            const userExists = registeredUsers.find(user =>
+                (user.email === userInput || user.username === userInput) && user.password === passwordInput
+            );
+
+            if (userExists) {
+                alert("Login successful!");
+                localStorage.setItem("loggedInUser", JSON.stringify({ username: userExists.username }));
+                window.location.href = "homepage.html"; // Redirect to homepage
+            } else {
+                errorMessage.classList.remove("hidden");
+            }
         }
     }
 </script>
+
 
 </body>
 </html>
