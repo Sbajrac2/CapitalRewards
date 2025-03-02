@@ -141,6 +141,11 @@
                 <div class="p-4 border-t bg-white">
                     <form id="chat-form" method="POST" action="/Chatpage">
                         <div class="flex gap-2">
+                            <!-- Dropdown menu added here -->
+                            <select id="ai-model" name="model" class="border rounded-lg p-3">
+                                <option value="SmartSaver">SmartSaver</option>
+                                <option value="GenQ">GenQ</option>
+                            </select>
                             <input id="chat-input" name="message" type="text" placeholder="Ask about savings, investments, budgeting..."
                                 class="flex-1 p-3 border rounded-lg" required>
                             <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
@@ -271,6 +276,12 @@
     document.addEventListener('mouseup', function() {
         isDragging = false;
         popup.style.cursor = 'grab';
+    });
+
+    // Store selected model in localStorage when form is submitted
+    document.getElementById('chat-form').addEventListener('submit', function() {
+        const selectedModel = document.getElementById('ai-model').value;
+        localStorage.setItem('selectedModel', selectedModel);
     });
 </script>
 
