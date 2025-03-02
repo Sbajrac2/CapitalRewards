@@ -13,6 +13,10 @@ app = Flask(__name__)
 app.secret_key = "your_secret_key_here"  # Add a secret key for session management
 CORS(app)
 
+@app.route('/')
+def homepage():
+    return render_template('homepage.html')
+
 @app.route('/homepage')
 def homepage():
     return render_template('homepage.html')
