@@ -181,6 +181,9 @@
         // Update the total points display
         document.getElementById("total-points-display").innerText = `Total Points: ${totalPoints}`;
 
+        // Load confetti history (which badges already got confetti)
+        let confettiBadges = JSON.parse(localStorage.getItem("confettiBadges")) || [];
+
         // Define the required points for each badge level
         const badgeLevels = [
             { id: "badge1-progress", textId: "badge1-text", required: 100 },
@@ -210,13 +213,31 @@
                 console.log(`Updating badge: ${badge.id}: ${percentage}%`);
                 progressBar.style.width = percentage + "%";
                 progressText.innerText = `${Math.round(percentage)}% Complete`;
-                //progressBar.nextElementSibling.innerText = `${Math.round(percentage)}% Complete`;
+            // 🎉 Trigger confetti only when `totalPoints` meets or exceeds `badge.required`
+         if (totalPoints >= badge.required) {
+            console.log(`🎊 Confetti triggered for ${badge.id}!`);
+            
+            setTimeout(() => {
+                launchConfetti();
+            }, 500);
+
+            // ✅ Store this badge ID in confetti history so it doesn’t trigger again
+            confettiBadges.push(badge.id);
+            localStorage.setItem("confettiBadges", JSON.stringify(confettiBadges));
+        } else if (totalPoints >= badge.required) {
+            console.log(` Confetti NOT triggered - ${badge.id} already in localStorage.`);
+        }
             }
         });
+    });  
+    // 🎊 Confetti Animation Function (OUTSIDE event listeners)
+function launchConfetti() {
+    confetti({
+        particleCount: 150,
+        spread: 100,
+        origin: { y: 0.6 },
     });
-    window.addEventListener("storage", function () {
-        location.reload(); // Auto-refresh the badges page when points update
-    });
+}
 
 </script>
 
