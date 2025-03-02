@@ -15,7 +15,7 @@ def homepage():
 def login():
     return render_template('Loginpage.html')
 
-client = genai.Client(api_key="")
+client = genai.Client(api_key="AIzaSyBIvKviwbeNVPKqxSAT1QlZbOxLq1-_pXE")
 
 @app.route("/Chatpage", methods=["GET", "POST"])
 def chatpage():
