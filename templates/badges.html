@@ -165,6 +165,7 @@
 <script>
     function resetPoints() {
         localStorage.removeItem("rewardPoints");
+        localStorage.removeItem("confettiBadges");
         location.reload(); // Refresh the page to update progress bars
     }
 </script>
@@ -215,7 +216,7 @@
                 progressBar.style.width = percentage + "%";
                 progressText.innerText = `${Math.round(percentage)}% Complete`;
             // 🎉 Trigger confetti only when `totalPoints` meets or exceeds `badge.required`
-         if (totalPoints >= badge.required) {
+         if (totalPoints >= badge.required && !confettiBadges.includes(badge.id)) {
             console.log(`🎊 Confetti triggered for ${badge.id}!`);
             
             setTimeout(() => {
