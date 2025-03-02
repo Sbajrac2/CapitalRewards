@@ -6,32 +6,23 @@
 p{
   /* background: rgba(255, 255, 255, 0.5); Light translucent white */
   text-shadow: white 4px 6px 10px;
-
 }
-
-/* Text Background Overlay */
 h2{
   text-shadow: white 4px 6px 10px;
-  padding: 12px 30px;
-
-  /*  display: inline-block;*/
-
-}
-/*  */
-h2 {
-  animation: glow 1.5s infinite alternate;
 }
 .hero-section{
   position: relative;
     height: 100vh;
-    background: url('../images/badgeLogo.png') no-repeat center center/cover;
-    background-blend-mode: lighten;
+    background: url('badgeLogo.png') no-repeat center center/cover;
+    background-blend-mode: overlay;
+    /* background-blend-mode: lighten; */
     background-size: contain;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
+
 .button-badge {
   background-color: #004977; /* Transparent background */
   color: white; /* White text */
@@ -50,6 +41,19 @@ h2 {
   /* color: #004977; Change text color to Capital One blue */
   border: 2px solid white; /* White border */
 }
+
+#total-points-display {
+    position: absolute; /* Position it within the section */
+    top: 20px; /* Adjust vertical placement */
+    left: 20px; /* Adjust horizontal placement */
+    font-size: 1.5rem; /* Make the text larger */
+    font-weight: bold; /* Make it stand out */
+    color: #004977; /* Capital One Red for emphasis */
+    background: rgba(255, 255, 255, 0.8); /* Light background for contrast */
+    padding: 10px 15px; /* Add spacing around the text */
+    border-radius: 8px; /* Soft rounded corners */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6); /* Add a subtle shadow */
+}
 .p-6 {
   transition: box-shadow 0.3s ease-in-out; /* Smooth transition */
 }
@@ -65,19 +69,6 @@ h2 {
 
 .p-6:hover {
   animation: pulseGlow 1s infinite alternate;
-}
-
-#total-points-display {
-    position: absolute; /* Position it within the section */
-    top: 20px; /* Adjust vertical placement */
-    left: 20px; /* Adjust horizontal placement */
-    font-size: 1.5rem; /* Make the text larger */
-    font-weight: bold; /* Make it stand out */
-    color: #004977; /* Capital One Red for emphasis */
-    background: rgba(255, 255, 255, 0.8); /* Light background for contrast */
-    padding: 10px 15px; /* Add spacing around the text */
-    border-radius: 8px; /* Soft rounded corners */
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6); /* Add a subtle shadow */
 }
 
 .badge1, .badge2,.badge3, .badge4,.badge5,.badge6 {
@@ -114,4 +105,8 @@ h2 {
   max-width: 115%; /* Ensures the image scales within the div */
   max-height: 150%; /* Prevents the image from being too large */
   object-fit: contain; /* Keeps the image's aspect ratio */
+}
+
+#badge2-progress {
+  box-shadow: 0 0 15px rgba(167, 160, 160, 0.9);
 }
