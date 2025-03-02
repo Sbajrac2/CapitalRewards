@@ -113,7 +113,7 @@
                                 {% else %}
                                     <div class="flex items-start gap-2">
                                         <div class="h-6 w-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs">🤖</div>
-                                        <div class="bg-gray-200 p-3 rounded-lg max-w-[80%]">
+                                        <div class="bg-gray-200 p-3 rounded-lg max-w-[80%] whitespace-pre-line">
                                             {{ message.content }}
                                         </div>
                                     </div>
@@ -122,16 +122,40 @@
                         {% endif %}
                     </div>
                     
-                    <!-- Show the most recent AI response if available -->
-                    {% if response %}
+                    <!-- Show the most recent user message if available -->
+                    {% if request.form.get("message") %}
                         <div class="flex justify-end" id="last-user-message">
                             <div class="bg-blue-600 text-white p-3 rounded-lg max-w-[80%]">
                                 {{ request.form.get("message") }}
                             </div>
                         </div>
+                    {% endif %}
+                    
+                    <!-- Show the investment response if available -->
+                    {% if investment_response %}
+                        <div class="flex items-start gap-2" id="investment-response">
+                            <div class="h-6 w-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs">🤖</div>
+                            <div class="bg-gray-200 p-3 rounded-lg max-w-[80%] whitespace-pre-line">
+                                {{ investment_response }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Show the cheaper alternatives response if available -->
+                    {% if cheaper_response %}
+                        <div class="flex items-start gap-2" id="cheaper-response">
+                            <div class="h-6 w-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs">🤖</div>
+                            <div class="bg-gray-200 p-3 rounded-lg max-w-[80%] whitespace-pre-line">
+                                {{ cheaper_response }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Show a general response if available (for GenQ model) -->
+                    {% if response and not investment_response and not cheaper_response %}
                         <div class="flex items-start gap-2" id="last-ai-response">
                             <div class="h-6 w-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs">🤖</div>
-                            <div class="bg-gray-200 p-3 rounded-lg max-w-[80%]">
+                            <div class="bg-gray-200 p-3 rounded-lg max-w-[80%] whitespace-pre-line">
                                 {{ response }}
                             </div>
                         </div>
