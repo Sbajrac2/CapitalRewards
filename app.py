@@ -6,7 +6,7 @@ import re
 import os
 from dotenv import load_dotenv
 
-load_dotenv()  # Load variables from .env file
+##load_dotenv()  # Load variables from .env file
 api_key = os.environ.get('API_KEY')
 
 app = Flask(__name__)
