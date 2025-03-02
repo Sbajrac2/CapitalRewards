@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartSaver AI Chatbox</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .primary-color { background-color: #004977; }
+        .secondary-color { background-color: #D03027; }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+
+<!-- Navbar -->
+<nav class="primary-color text-white py-4 px-6 flex justify-between items-center">
+    <h1 class="text-2xl font-bold">CapitalRewards</h1>
+    <ul class="flex space-x-6">
+        <li><a href="homepage" class="hover:text-gray-300">Home</a></li>
+        <li><a href="badges" class="hover:text-gray-300">Badges</a></li>
+        <li><a href="Chatpage" class="hover:text-gray-300">AI Chatbox</a></li>
+        <li><a href="Loginpage" class="secondary-color px-4 py-2 rounded-lg hover:bg-red-700">Login</a></li>
+    </ul>
+</nav>
+
+<section class="py-16 text-center">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">SmartSaver AI Assistant</h1>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                Get personalized financial advice and recommendations from our AI assistant.
+            </p>
+        </div>
+
+        <!-- Chatbox -->
+        <div class="border-0 shadow-lg rounded-lg overflow-hidden bg-white">
+            <div class="flex flex-col h-[600px]">
+                <div class="p-4 bg-gray-200 border-b flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <div class="h-8 w-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                            🤖
+                        </div>
+                        <span class="font-medium">SmartSaver AI</span>
+                    </div>
+                    <button onclick="resetChat()" class="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400">
+                        🔄 Reset Chat
+                    </button>
+                </div>
+
+                <div id="chat-container" class="flex-1 p-4 overflow-y-auto space-y-4 bg-gray-50">
+                    <div class="flex items-start gap-2">
+                        <div class="h-6 w-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs">🤖</div>
+                        <div class="bg-gray-200 p-3 rounded-lg max-w-[80%]">
+                            Hello! I'm your SmartSaver AI assistant. Can you please input how much and what item you are buying?
+                        </div>
+                    </div>
+                    
+                    <!-- Add chat history from server if available -->
+                    <div id="chat-history">
+                        {% if chat_history %}
+                            {% for message in chat_history %}
+                                {% if message.role == 'user' %}
+                                    <div class="flex justify-end">
+                                        <div class="bg-blue-600 text-white p-3 rounded-lg max-w-[80%]">
+                                            {{ message.content }}
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="flex items-start gap-2">
+                                        <div class="h-6 w-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs">🤖</div>
+                                        <div class="bg-gray-200 p-3 rounded-lg max-w-[80%]">
+                                            {{ message.content }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Show the most recent AI response if available -->
+                    {% if response %}
+                        <div class="flex justify-end" id="last-user-message">
+                            <div class="bg-blue-600 text-white p-3 rounded-lg max-w-[80%]">
+                                {{ request.form.get("message") }}
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2" id="last-ai-response">
+                            <div class="h-6 w-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs">🤖</div>
+                            <div class="bg-gray-200 p-3 rounded-lg max-w-[80%]">
+                                {{ response }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="p-4 border-t bg-white">
+                    <form id="chat-form" method="POST" action="/Chatpage">
+                        <div class="flex gap-2">
+                            <input id="chat-input" name="message" type="text" placeholder="Ask about savings, investments, budgeting..."
+                                class="flex-1 p-3 border rounded-lg" required>
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                                📤 Send
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="primary-color text-white py-6 text-center">
+    <p>&copy; 2025 CapitalOneBank. All rights reserved.</p>
+</footer>
+
+<script>
+    // When the page loads, scroll to the bottom of the chat container
+    window.onload = function() {
+        const chatContainer = document.getElementById("chat-container");
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    };
+
+    function resetChat() {
+        const chatContainer = document.getElementById("chat-container");
+        chatContainer.innerHTML = `
+                <div class="flex items-start gap-2">
+                    <div class="h-6 w-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs">🤖</div>
+                    <div class="bg-gray-200 p-3 rounded-lg max-w-[80%]">
+                        Hello! I'm your SmartSaver AI assistant. Can you please input how much and what item you are buying?
+                    </div>
+                </div>
+            `;
+        alert("Chat has been reset");
+    }
+</script>
+
+</body>
+</html>
