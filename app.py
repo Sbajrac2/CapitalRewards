@@ -7,7 +7,7 @@ import os
 from dotenv import load_dotenv
 
 ##load_dotenv()  # Load variables from .env file
-api_key = os.environ.get('API_KEY')
+api_key = os.environ.get("API_KEY")
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key_here"  # Add a secret key for session management
