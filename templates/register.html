@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .primary-color { background-color: #004977; }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+
+<!-- Navbar -->
+<nav class="primary-color text-white py-4 px-6 flex justify-between">
+    <a href="homepage.html" class="font-bold">Home</a>
+</nav>
+
+<!-- Signup Section -->
+<section class="py-16 bg-gray-100 text-center">
+    <h2 class="text-3xl font-semibold text-gray-900 mb-6">Create an Account</h2>
+
+    <div class="mt-8 max-w-md mx-auto bg-white p-8 shadow-lg rounded-lg">
+        <form id="signup-form">
+            <div class="mb-4">
+                <label for="username" class="block text-gray-700 font-medium">Username</label>
+                <input type="text" id="username" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="Choose a username" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700 font-medium">Email</label>
+                <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="Enter your email" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700 font-medium">Password</label>
+                <input type="password" id="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="Create a password" required>
+            </div>
+
+            <button type="button" onclick="registerUser()" class="w-full bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800">
+                Sign Up
+            </button>
+
+            <p class="text-sm text-gray-600 mt-4">
+                Already have an account? <a href="Loginpage.html" class="text-blue-600 hover:underline">Login</a>
+            </p>
+
+            <p id="signup-message" class="text-green-600 mt-4 hidden">Account created successfully!</p>
+        </form>
+    </div>
+</section>
+
+<script>
+    function registerUser() {
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const signupMessage = document.getElementById("signup-message");
+
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+
+        // Check if user already exists
+        if (users.some(user => user.email === email || user.username === username)) {
+            alert("User already exists! Try logging in.");
+            return;
+        }
+
+        // Save new user
+        users.push({ username, email, password });
+        localStorage.setItem("users", JSON.stringify(users));
+
+        localStorage.setItem("loggedInUser", JSON.stringify({ username }));
+
+        signupMessage.classList.remove("hidden");
+        setTimeout(() => window.location.href = "Loginpage.html", 2000); // Redirect to login
+    }
+</script>
+
+</body>
+</html>
