@@ -210,9 +210,21 @@
                 progressBar.style.width = percentage + "%";
                 progressText.innerText = `${Math.round(percentage)}% Complete`;
                 //progressBar.nextElementSibling.innerText = `${Math.round(percentage)}% Complete`;
+                // 🎉 Trigger confetti when progress reaches 100%
+            if (percentage === 100) {
+                launchConfetti();
+            }
             }
         });
     });
+    // 🎊 Confetti Animation Function (OUTSIDE event listeners)
+function launchConfetti() {
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+    });
+}
     window.addEventListener("storage", function () {
     location.reload(); // Auto-refresh the badges page when points update
 });
