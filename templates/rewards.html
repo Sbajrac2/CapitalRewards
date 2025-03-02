@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rewards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .primary-color { background-color: #004977; }
+        .secondary-color { background-color: #D03027; }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+
+
+<!-- Navbar -->
+<nav class="primary-color text-white py-4 px-6 flex justify-between items-center">
+    <h1 class="text-2xl font-bold">CapitalRewards</h1>
+    <ul class="flex space-x-6">
+        <li><a href="homepage.html" class="hover:text-gray-300">Home</a></li>
+        <li><a href="badges.html" class="hover:text-gray-300">Badges</a></li>
+        <li><a href="Chatpage.html" class="hover:text-gray-300">AI Chatbox</a></li>
+
+        <!-- Dynamic Login Button -->
+        <li>
+            <div id="login-area">
+                <a href="Loginpage.html" id="login-button" class="secondary-color px-4 py-2 rounded-lg hover:bg-red-700">
+                    Login
+                </a>
+            </div>
+        </li>
+    </ul>
+</nav>
+<!-- Load Navbar -->
+<!--<div id="navbar-container"></div>-->
+
+<section class="py-16 text-center">
+    <div class="container mx-auto px-4 max-w-lg bg-white p-8 shadow-lg rounded-lg">
+        <h2 class="text-3xl font-semibold mb-6">Your Rewards</h2>
+        <p class="text-lg">Total Reward Points: <span id="reward-points">0</span></p>
+
+        <div class="mt-6">
+            <label class="block text-lg font-medium">How much did you save?</label>
+            <input type="number" id="savings-input" class="w-full px-4 py-2 border rounded-lg mt-2" placeholder="Enter amount">
+            <button onclick="addRewardPoints()" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                Add Savings
+            </button>
+        </div>
+    </div>
+</section>
+
+<script>
+    function loadNavbar() {
+        fetch("includes/navbar.html")
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("navbar-container").innerHTML = html;
+            })
+            .catch(error => console.error("Error loading navbar:", error));
+    }
+    document.addEventListener("DOMContentLoaded", loadNavbar);
+
+    function loadRewards() {
+        document.getElementById("reward-points").textContent = localStorage.getItem("rewardPoints") || 0;
+    }
+
+    function addRewardPoints() {
+        let savings = parseFloat(document.getElementById("savings-input").value);
+        if (isNaN(savings) || savings <= 0) {
+            alert("Please enter a valid savings amount!");
+            return;
+        }
+
+        let rewardPoints = parseInt(localStorage.getItem("rewardPoints")) || 0;
+        let earnedPoints = Math.floor(savings / 10); // Earn 1 point per $10 saved
+
+        rewardPoints += earnedPoints;
+        localStorage.setItem("rewardPoints", rewardPoints);
+        document.getElementById("reward-points").textContent = rewardPoints;
+
+        alert(`You earned ${earnedPoints} reward points!`);
+    }
+
+    document.addEventListener("DOMContentLoaded", loadRewards);
+</script>
+
+</body>
+</html>
