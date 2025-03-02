@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="bg-white text-gray-900">
+
+<!-- Load Navbar -->
+<div id="navbar-container"></div>
+
+<section class="py-16 text-center">
+    <div class="container mx-auto px-4 max-w-lg bg-white p-8 shadow-lg rounded-lg">
+        <h2 class="text-3xl font-semibold mb-6">User Profile</h2>
+        <div id="profile-info">
+            <p class="text-lg"><strong>Username:</strong> <span id="profile-username"></span></p>
+            <p class="text-lg"><strong>Email:</strong> <span id="profile-email"></span></p>
+            <p class="text-lg"><strong>Reward Points:</strong> <span id="profile-points">0</span></p>
+        </div>
+
+        <button onclick="logout()" class="mt-6 bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700">
+            Logout
+        </button>
+    </div>
+</section>
+
+<script>
+    // Load Navbar
+    function loadNavbar() {
+        fetch("includes/navbar.html")
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("navbar-container").innerHTML = html;
+            })
+            .catch(error => console.error("Error loading navbar:", error));
+    }
+    document.addEventListener("DOMContentLoaded", loadNavbar);
+
+    // Load Profile Info
+    function loadProfile() {
+        const user = JSON.parse(localStorage.getItem("loggedInUser"));
+        if (!user) {
+            window.location.href = "Loginpage.html"; // Redirect to login if not logged in
+        } else {
+            document.getElementById("profile-username").textContent = user.username;
+            document.getElementById("profile-email").textContent = user.email || "Not Provided";
+            document.getElementById("profile-points").textContent = localStorage.getItem("rewardPoints") || 0;
+        }
+    }
+
+    function logout() {
+        localStorage.removeItem("loggedInUser");
+        window.location.href = "Loginpage.html"; // Redirect to login
+    }
+
+    document.addEventListener("DOMContentLoaded", loadProfile);
+</script>
+
+</body>
+</html>
